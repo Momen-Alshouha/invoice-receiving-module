@@ -4,11 +4,12 @@ import { InvoicesComponent } from "./invoices/invoices.component";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
+import { LayoutComponent } from "./layout/layout.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AddInvoiceComponent,FormsModule,RouterOutlet, InvoicesComponent,HttpClientModule],
+  imports: [AddInvoiceComponent, FormsModule, RouterOutlet, InvoicesComponent, HttpClientModule, LayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
