@@ -1,0 +1,145 @@
+<div *ngIf="!formSubmitted"class="container my-4 add-invoice-form">
+  <form
+    [formGroup]="invoiceForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <!-- General Info Section -->
+    <div class="section">
+      <h4>General Info</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="supplier" class="form-label">Supplier</label>
+          <select
+            id="supplier"
+            formControlName="supplierName"
+            class="form-select"
+          >
+            <option value="Toyota Motor Corporation">
+              Toyota Motor Corporation
+            </option>
+            <!-- Add other suppliers here as options -->
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="invoiceNumber" class="form-label">Invoice Number</label>
+          <input
+            type="text"
+            id="invoiceNumber"
+            formControlName="invoiceNumber"
+            class="form-control"
+            placeholder="25/25625578"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="invoiceDate" class="form-label">Invoice Date</label>
+          <input
+            type="date"
+            id="invoiceDate"
+            formControlName="invoiceDate"
+            class="form-control"
+            placeholder="DD/MM/YYYY"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction Section -->
+    <div class="section">
+      <h4>Transaction</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="currencyId" class="form-label">Supplier Currency</label>
+          <select
+            id="currencyId"
+            formControlName="currencyId"
+            class="form-select"
+          >
+            <option value=1>USD</option>
+            <option value=2>JOD</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="exchangeRate" class="form-label">Exchange Rate</label>
+          <input
+            type="number"
+            id="exchangeRate"
+            formControlName="exchangeRate"
+            class="form-control"
+            placeholder="0.71"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipments Section with Multi-Select Dropdown -->
+    <div class="section">
+      <h4>Shipments</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="shipmentNo" class="form-label">Shipment No.</label>
+          <select
+            id="shipmentNo"
+            class="form-select"
+            (change)="addShipment($event)"
+          >
+            <option value="" disabled selected>Select Shipment</option>
+            <option *ngFor="let shipment of shipments" [value]="shipment">
+              {{ shipment }}
+            </option>
+          </select>
+
+          <!-- Display selected shipments as tags/chips below the dropdown -->
+          <div class="selected-shipments mt-2">
+            <span
+              class="shipment-tag"
+              *ngFor="let shipment of selectedShipments"
+              (click)="removeShipment(shipment)"
+            >
+              {{ shipment }} <i class="bi bi-x-circle"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-flex justify-content-end mt-4">
+      <button type="submit" class="btn btn-primary save-button">
+        Save & Continue
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Display Added Invoice Details -->
+<div *ngIf="invoiceId" class="container added-invoice-details mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h5>General Info</h5>
+        <p>{{ createdInvoiceData.supplierName }}</p>
+        <p>{{ createdInvoiceData.invoiceNumber }}</p>
+        <p>{{ createdInvoiceData.invoiceDate | date : "MM/dd/yyyy" }}</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h5>Transaction</h5>
+        <p>{{ createdInvoiceData.currencyId }}</p>
+        <p>{{ createdInvoiceData.exchangeRate }}</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h5>Shipment No.</h5>
+        <p *ngFor="let shipment of selectedShipments">{{ shipment }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+      <div>Invoice Seq:</div><strong>{{ createdInvoiceData.invoiceSeq }}</strong>  |
+      <div>Status:</div><strong>{{ createdInvoiceData.status }}</strong>  |
+      <div>Creation Date:</div><strong>    {{ createdInvoiceData.invoiceDate | date : "MM/dd/yyyy" }}</strong>  |
+  </div>
+</div>

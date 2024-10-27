@@ -1,4 +1,5 @@
 export interface Invoice {
+    invoiceId: number | null
     invoiceNumber: string | null;
     invoiceSeq: number | null;
     supplierName: string | null;

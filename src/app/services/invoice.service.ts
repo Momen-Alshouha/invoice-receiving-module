@@ -15,4 +15,9 @@ export class InvoiceService {
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.apiUrl);
   }
+
+  addInvoice(invoiceData: Partial<Invoice>): Observable<Invoice> {
+    console.log("test");
+    return this.http.post<Invoice>(API_ENDPOINTS.addInvoice, invoiceData);
+  }
 }

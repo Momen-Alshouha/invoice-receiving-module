@@ -6,29 +6,30 @@ import { Invoice } from '../interfaces/invoice.interface';
 import { FormsModule } from '@angular/forms';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { NgbDateStruct, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-invoices',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, NgbDatepickerModule, DatePickerComponent],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    NgbDatepickerModule,
+    DatePickerComponent,
+  ],
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.css'],
 })
 export class InvoicesComponent implements OnInit {
-  // Data properties
   invoices: Invoice[] = [];
   filteredInvoices: Invoice[] = [];
-  
-  // Filter properties
   selectedStatus: number | null = null;
   searchText: string = '';
   searchInvoiceSeq: string = '';
   selectedDate: NgbDateStruct | null = null;
-
-  // UI control properties
   showInvoiceSeqSearch: boolean = false;
-
-  // Status options for dropdown
   statuses = [
     { label: 'All', value: null },
     { label: 'Draft', value: 1 },
@@ -44,16 +45,17 @@ export class InvoicesComponent implements OnInit {
   private loadInvoices(): void {
     this.invoiceService.getInvoices().subscribe((data) => {
       this.invoices = data;
-      this.filteredInvoices = data; 
+      this.filteredInvoices = data;
     });
   }
 
   applyFilter(): void {
-    this.filteredInvoices = this.invoices.filter(invoice =>
-      this.matchesText(invoice) &&
-      this.matchesStatus(invoice) &&
-      this.matchesInvoiceSeq(invoice) &&
-      this.matchesSelectedDate(invoice)
+    this.filteredInvoices = this.invoices.filter(
+      (invoice) =>
+        this.matchesText(invoice) &&
+        this.matchesStatus(invoice) &&
+        this.matchesInvoiceSeq(invoice) &&
+        this.matchesSelectedDate(invoice)
     );
   }
 
@@ -73,19 +75,26 @@ export class InvoicesComponent implements OnInit {
     this.applyFilter();
   }
 
-
   private matchesText(invoice: Invoice): boolean {
     if (!this.searchText) return true;
     const search = this.searchText.toLowerCase();
     return (
-      String(invoice.invoiceSeq ?? '').toLowerCase().includes(search) ||
-      String(invoice.supplierName ?? '').toLowerCase().includes(search) ||
-      String(invoice.invoiceNumber ?? '').toLowerCase().includes(search)
+      String(invoice.invoiceSeq ?? '')
+        .toLowerCase()
+        .includes(search) ||
+      String(invoice.supplierName ?? '')
+        .toLowerCase()
+        .includes(search) ||
+      String(invoice.invoiceNumber ?? '')
+        .toLowerCase()
+        .includes(search)
     );
   }
 
   private matchesStatus(invoice: Invoice): boolean {
-    return this.selectedStatus !== null ? invoice.statusId === this.selectedStatus : true;
+    return this.selectedStatus !== null
+      ? invoice.statusId === this.selectedStatus
+      : true;
   }
 
   private matchesInvoiceSeq(invoice: Invoice): boolean {
@@ -98,7 +107,11 @@ export class InvoicesComponent implements OnInit {
   private matchesSelectedDate(invoice: Invoice): boolean {
     if (!this.selectedDate) return true;
 
-    const selectedDateObj = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day);
+    const selectedDateObj = new Date(
+      this.selectedDate.year,
+      this.selectedDate.month - 1,
+      this.selectedDate.day
+    );
     const invoiceDateObj = new Date(invoice.invoiceDate);
 
     return (

@@ -1,0 +1,80 @@
+.container {
+    border: 1px solid #d3d3d3;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .section h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .form-control,
+  .form-select {
+    border: 1px solid #ced4da;
+    font-size: 0.875rem;
+    color: #333;
+  }
+  
+  input[type="date"]::placeholder {
+    color: #bbb;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    font-size: 0.875rem;
+  }
+  
+  .save-button {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 8px 20px;
+  }
+  
+  .save-button:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  
+  .form-select[multiple] {
+    height: auto;
+    min-height: 2.5rem;
+  }
+  
+  .selected-shipments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .shipment-tag {
+    background-color: #007bff;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .shipment-tag i {
+    margin-left: 0.25rem;
+  }
+  
