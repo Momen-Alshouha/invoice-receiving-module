@@ -8,12 +8,13 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InvoiceItemsComponent } from "../invoice-items/invoice-items.component";
 
 CommonModule;
 @Component({
   selector: 'app-add-invoice',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InvoiceItemsComponent],
   templateUrl: './add-invoice.component.html',
   styleUrl: './add-invoice.component.css',
 })
