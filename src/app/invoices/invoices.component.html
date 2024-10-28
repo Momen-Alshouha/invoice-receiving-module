@@ -1,7 +1,7 @@
 <div class="container my-4">
   <!-- Global Search Filter -->
 
-  <div class="form-group mb-3 w-100">
+  <div class="form-group w-100">
     <div class="d-flex justify-content-between align-items-center">
       <div class="flex-grow-1 me-2">
         <input
@@ -14,9 +14,14 @@
         />
       </div>
 
-      <button class="btn btn-dark" routerLink="/add-invoice">
-        New Invoice
-      </button>
+    <div class="d-flex flex-column gap-2">
+        <button class="new-invoice-btn btn btn-dark" routerLink="/add-invoice">
+            <i class="bi bi-plus"></i> New Invoice
+          </button>
+          <p class="m-0">
+            <span class="rowsNo"># Rows: {{ filteredInvoices.length }}</span> 
+          </p>    
+    </div>
     </div>
   </div>
 
@@ -43,15 +48,15 @@
               />
             </div>
           </th>
-          <th scope="col">Supplier</th>
-          <th scope="col">Supplier Invoice No</th>
+          <th scope="col" class="w-25">Supplier</th>
+          <th scope="col">Invoice No</th>
           <th scope="col">
             Creation Date
             <app-datepicker
               (dateSelected)="onDateSelected($event)"
             ></app-datepicker>
           </th>
-          <th scope="col">
+          <th class="th-status" scope="col">
             <select
               class="form-select form-select-sm"
               [(ngModel)]="selectedStatus"
@@ -64,6 +69,7 @@
               </option>
             </select>
           </th>
+          <th><i class="bi bi-three-dots-vertical"></i></th>
         </tr>
       </thead>
       <tbody>
@@ -87,6 +93,7 @@
                 : "Unknown"
             }}
           </td>
+          <td><i class="bi bi-three-dots-vertical"></i></td>
         </tr>
       </tbody>
     </table>

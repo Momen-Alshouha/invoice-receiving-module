@@ -1,5 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+  font-family: "Encode Sans", sans-serif;
+}
+
 .table-responsive {
     overflow-x: visible;
+}
+
+th {
+    font-weight: 400;
+}
+
+td {
+    font-weight: 500;
+}
+
+th,tr,td {
+    border: 0;
+    font-size: 14px;
+}
+
+table thead tr th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+table thead tr th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+.add-invoice-form input:focus, .add-invoice-form .form-select:focus, .add-invoice-form select:focus {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.add-invoice-form input:focus,.add-invoice-form .form-select:focus, .add-invoice-form select:focus {
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid #bbb !important;
+    padding: 10px !important;
+    border-radius: 0 !important;
+}
+
+input,select {
+    box-shadow: none !important;
 }

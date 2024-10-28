@@ -20,4 +20,11 @@ export class InvoiceItemsService {
     return this.http.get<InvoiceItem[]>(`${API_ENDPOINTS.searchItems}${itemNo}`);
   }
   
+  addItem(invoiceItem: InvoiceItem): Observable<any> {
+    return this.http.post(`${API_ENDPOINTS.addInvoiceItem}`, invoiceItem);
+  }
+
+  updateItem(item: InvoiceItem | null): Observable<any> {
+    return this.http.post(`${API_ENDPOINTS.addInvoiceItem}`, item);
+  }
 }

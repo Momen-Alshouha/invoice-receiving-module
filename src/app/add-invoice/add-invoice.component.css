@@ -64,17 +64,29 @@
   }
   
   .shipment-tag {
-    background-color: #007bff;
-    color: white;
+    background-color: transparent;
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 0.875rem;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    border: 1.6px solid gray;
   }
   
   .shipment-tag i {
     margin-left: 0.25rem;
   }
   
+  .add-invoice-form {
+    background-color: #f5f5f5;
+    border: 0;
+  }
+  
+  input,select {
+    background: transparent;
+    border: 0 !important;
+    border-bottom: 1px solid #bbb !important;
+    padding: 10px !important;
+    border-radius: 0 !important;
+  }

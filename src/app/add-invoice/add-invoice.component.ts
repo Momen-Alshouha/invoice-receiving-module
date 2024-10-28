@@ -67,8 +67,6 @@ export class AddInvoiceComponent {
   }
 
   onSubmit() {
-    console.log("esss");
-    console.log('Invoice added successfully', this.invoiceForm.value);
     if (this.invoiceForm.valid) {
       
       const formData = {

@@ -1,0 +1,13 @@
+.th-status {
+    width: 200px;
+}
+
+.rowsNo {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.new-invoice-btn {
+    background-color: #353535;
+    border-radius: 8px;
+}

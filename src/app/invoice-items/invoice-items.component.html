@@ -1,26 +1,23 @@
 <div class="container my-4 p-0">
-  <h3>Invoice Items</h3>
+  <div class="upload-items">Upload Items Methods</div>
 
-  <!-- Search and Add Section -->
   <div class="row mb-3 position-relative">
     <div class="col-md-12 p-0">
-      <!-- Call onSearch with each keystroke -->
 
-      <div class="container">
+      <div class="container p-0">
       
         <div class="row align-items-end">
-          <!-- Item No Input Field -->
-          <div class="col-md-3 p-0 ">
+          <div class="col-md-3 p-0">
+            <label for="">Search Item</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control searchItemInput"
               placeholder="Enter Item No"
               [(ngModel)]="searchItemNo"
               (input)="onSearch(searchItemNo)"
             />
           </div>
       
-          <!-- Quantity Input Field -->
           <div *ngIf="selectedItem" class="col-md-1 p-0">
             <div class="form-group p-0">
               <label for="quantity">QTY</label>
@@ -34,7 +31,6 @@
             </div>
           </div>
       
-          <!-- Add to Invoice Button -->
           <div *ngIf="selectedItem" class="col-md-1 p-0">
             <button class="btn btn-dark w-100" (click)="addItem()">
               Add
@@ -61,41 +57,149 @@
     </div>
   </div>
 
-  <!-- Invoice Items Table -->
   <table class="table table-striped table-bordered mt-4">
     <thead class="table-light">
       <tr>
-        <th scope="col">Invoice ID</th>
-        <th scope="col">Seq</th>
-        <th scope="col">Item No</th>
-        <th scope="col">Quantity</th>
+        <th scope="col">Seq.</th>
+        <th scope="col">Item No.</th>
+        <th scope="col">Invoice QTY</th>
         <th scope="col">FOB</th>
         <th scope="col">FOB Amount</th>
         <th scope="col">Net Amount</th>
-        <th scope="col">Total Amount</th>
-        <th scope="col">Serial No</th>
-        <th scope="col">Serial Code</th>
-        <th scope="col">Tax Type ID</th>
-        <th scope="col">Tax Percentage</th>
         <th scope="col">Tax Amount</th>
+        <th scope="col">Total Amount <small>(USD)</small></th>
+        <th scope="col"><i class="bi bi-three-dots-vertical"></i></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of invoiceItems">
-        <td>{{ item.invoiceId }}</td>
         <td>{{ item.seq }}</td>
         <td>{{ item.itemNo }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.fob }}</td>
         <td>{{ item.fobAmount }}</td>
         <td>{{ item.netAmount }}</td>
-        <td>{{ item.totalAmount }}</td>
-        <td>{{ item.serialNo }}</td>
-        <td>{{ item.serialCode }}</td>
-        <td>{{ item.taxTypeId }}</td>
-        <td>{{ item.taxPercentage }}%</td>
         <td>{{ item.taxAmount }}</td>
+        <td>{{ item.totalAmount }}</td>
+        <td>
+            <span
+              class="serialNo"
+              [ngClass]="{'bg-dark text-white': item.serialNo}"
+              (click)="openSerialModal(item, serialModal)"
+              style="cursor: pointer"
+            >
+              #
+            </span>
+            <i class="bi bi-trash"></i>
+          </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+
+
+<div class="container mt-4">
+    <div class="row">
+      <!-- Invoice Description -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="invoiceDescription" class="form-label"><strong>Invoice Description</strong></label>
+          <textarea
+            id="invoiceDescription"
+            class="form-control"
+            rows="5"
+            [(ngModel)]="invoiceDescription"
+          ></textarea>
+        </div>
+      </div>
+  
+      <!-- Summary Details -->
+      <div class="col-md-6">
+        <div class="summary-box p-3 bg-light rounded">
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Total Net Amount:</strong>
+            <span class="text-end">{{ totalNetAmount | currency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Total Discount Amount:</strong>
+            <span class="text-end">{{ totalDiscountAmount | currency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Net Total:</strong>
+            <span class="text-end">{{ netTotal | currency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Total Tax Amount:</strong>
+            <span class="text-end">{{ totalTaxAmount | currency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Grand Amount:</strong>
+            <span class="text-end">{{ grandAmount | currency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Exchange Rate:</strong>
+            <span class="text-end">{{ exchangeRate }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Grand Amount in Local Currency:</strong>
+            <span class="text-end">{{ grandAmountLocal | currency }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  
+<!-- Searial Modal  -->
+<ng-template #serialModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-basic-title">
+        {{ selectedItem?.serialNo ? 'Serial Number Details' : 'Add Serial Number' }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+  
+    <div class="modal-body">
+      <div *ngIf="selectedItem?.serialNo">
+        <p><strong>Serial No:</strong> {{ selectedItem?.serialNo }}</p>
+        <p><strong>Serial Code:</strong> {{ selectedItem?.serialCode || 'N/A' }}</p>
+      </div>
+  
+      <div *ngIf="!selectedItem?.serialNo">
+        <div class="mb-3">
+          <label for="serialNoInput" class="form-label">Serial No</label>
+          <input
+            type="text"
+            id="serialNoInput"
+            class="form-control"
+            [(ngModel)]="serialNoInput"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="serialCodeInput" class="form-label">Serial Code</label>
+          <input
+            type="text"
+            id="serialCodeInput"
+            class="form-control"
+            [(ngModel)]="serialCodeInput"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+      <button *ngIf="!selectedItem?.serialNo" type="button" class="btn btn-primary" (click)="saveSerial()">
+        Save
+      </button>
+    </div>
+  </ng-template>
