@@ -18,7 +18,7 @@
             />
           </div>
       
-          <div *ngIf="selectedItem" class="col-md-1 p-0">
+          <div *ngIf="selectedItem" class="qty-div col-md-1 p-0">
             <div class="form-group p-0">
               <label for="quantity">QTY</label>
               <input
@@ -32,7 +32,7 @@
           </div>
       
           <div *ngIf="selectedItem" class="col-md-1 p-0">
-            <button class="btn btn-dark w-100" (click)="addItem()">
+            <button class="btn btn-dark add-item-btn" (click)="addItem()">
               Add
             </button>
           </div>

@@ -137,10 +137,10 @@
     </div>
   </div>
 
-  <div class="mt-4 d-flex gap-2">
-      <div>Invoice Seq: <strong>{{ createdInvoiceData.invoiceSeq }}</strong>  </div>
-      <div>Status: <strong>{{ createdInvoiceData.status }}</strong> </div> 
-      <div>Creation Date: <strong>    {{ createdInvoiceData.invoiceDate | date : "MM/dd/yyyy" }}</strong>  </div>
+  <div class="mt-5 d-flex gap-4">
+      <div class="d-flex flex-column gap-3 border-right">Invoice Seq<strong>{{ createdInvoiceData.invoiceSeq }}</strong>  </div>
+      <div class="d-flex flex-column gap-3 border-right">Status<strong>{{ createdInvoiceData.status }}</strong> </div> 
+      <div class="d-flex flex-column gap-3">Creation Date<strong>    {{ createdInvoiceData.invoiceDate | date : "MM/dd/yyyy" }}</strong>  </div>
   </div>
 </div>
 

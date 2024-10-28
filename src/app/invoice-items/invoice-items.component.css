@@ -23,3 +23,23 @@
   .searchItemInput:focus {
     box-shadow:none !important ;
   }
+
+  .searchItemInput {
+    border-radius: 8px 0 0 8px;
+  }
+
+  #quantity {
+    width: 55px;
+    border-radius: 0 8px 8px 0;
+    border-left: 0;
+  }
+
+  .qty-div {
+    width: auto;
+    margin-right: 5px;
+  }
+
+  .add-item-btn {
+    background-color: white;
+    border: 1px solid gray;
+  }
