@@ -117,7 +117,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="invoices.length === 0">
+        <tr *ngIf="invoices.length === 0 || filteredInvoices.length === 0">
           <td colspan="8" class="text-center">No invoices found.</td>
         </tr>
         <tr *ngFor="let invoice of filteredInvoices">
