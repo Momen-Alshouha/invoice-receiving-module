@@ -3,9 +3,7 @@
 
   <div class="row mb-3 position-relative">
     <div class="col-md-12 p-0">
-
       <div class="container p-0">
-      
         <div class="row align-items-end">
           <div class="col-md-3 p-0">
             <label for="">Search Item</label>
@@ -17,7 +15,7 @@
               (input)="onSearch(searchItemNo)"
             />
           </div>
-      
+
           <div *ngIf="selectedItem" class="qty-div col-md-1 p-0">
             <div class="form-group p-0">
               <label for="quantity">QTY</label>
@@ -30,16 +28,13 @@
               />
             </div>
           </div>
-      
+
           <div *ngIf="selectedItem" class="col-md-1 p-0">
-            <button class="btn btn-dark add-item-btn" (click)="addItem()">
-              Add
-            </button>
+            <button class="btn add-item-btn" (click)="addItem()">Add</button>
           </div>
         </div>
       </div>
 
-      
       <!-- Dropdown for search results -->
       <div
         class="col-md-3 list-group position-absolute"
@@ -82,124 +77,131 @@
         <td>{{ item.taxAmount }}</td>
         <td>{{ item.totalAmount }}</td>
         <td>
-            <span
-              class="serialNo"
-              [ngClass]="{'bg-dark text-white': item.serialNo}"
-              (click)="openSerialModal(item, serialModal)"
-              style="cursor: pointer"
-            >
-              #
-            </span>
-            <i class="bi bi-trash"></i>
-          </td>
+          <span
+            class="serialNo me-2"
+            [ngClass]="{ 'bg-dark text-white': item.serialNo }"
+            (click)="openSerialModal(item, serialModal)"
+            style="cursor: pointer"
+          >
+            #
+          </span>
+          <i class="bi bi-trash"></i>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-
-
 <div class="container mt-4">
-    <div class="row">
-      <!-- Invoice Description -->
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="invoiceDescription" class="form-label"><strong>Invoice Description</strong></label>
-          <textarea
-            id="invoiceDescription"
-            class="form-control"
-            rows="5"
-            [(ngModel)]="invoiceDescription"
-          ></textarea>
-        </div>
+  <div class="row">
+    <!-- Invoice Description -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="invoiceDescription" class="form-label"
+          ><strong>Invoice Description</strong></label
+        >
+        <textarea
+          id="invoiceDescription"
+          class="form-control"
+          rows="5"
+          [(ngModel)]="invoiceDescription"
+        ></textarea>
       </div>
-  
-      <!-- Summary Details -->
-      <div class="col-md-6">
-        <div class="summary-box p-3 bg-light rounded">
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Total Net Amount:</strong>
-            <span class="text-end">{{ totalNetAmount | currency }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Total Discount Amount:</strong>
-            <span class="text-end">{{ totalDiscountAmount | currency }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Net Total:</strong>
-            <span class="text-end">{{ netTotal | currency }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Total Tax Amount:</strong>
-            <span class="text-end">{{ totalTaxAmount | currency }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Grand Amount:</strong>
-            <span class="text-end">{{ grandAmount | currency }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Exchange Rate:</strong>
-            <span class="text-end">{{ exchangeRate }}</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <strong>Grand Amount in Local Currency:</strong>
-            <span class="text-end">{{ grandAmountLocal | currency }}</span>
-          </div>
+    </div>
+
+    <!-- Summary Details -->
+    <div class="col-md-6">
+      <div class="summary-box p-4 rounded d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Total Net Amount:</span>
+          <strong>{{ totalNetAmount | currency }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Total Discount Amount:</span>
+          <strong>{{ totalDiscountAmount | currency }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Net Total:</span>
+          <strong>{{ netTotal | currency }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Total Tax Amount:</span>
+          <strong>{{ totalTaxAmount | currency }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Grand Amount:</span>
+          <strong>{{ grandAmount | currency }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Exchange Rate:</span>
+          <strong>{{ exchangeRate }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-end">Grand Amount in Local Currency:</span>
+          <strong>{{ grandAmountLocal | currency }}</strong>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
 
-
-
-  
 <!-- Searial Modal  -->
 <ng-template #serialModal let-modal>
-    <div class="modal-header">
-      <h5 class="modal-title" id="modal-basic-title">
-        {{ selectedItem?.serialNo ? 'Serial Number Details' : 'Add Serial Number' }}
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      ></button>
+  <div class="modal-header">
+    <h6 class="modal-title" id="modal-basic-title">
+      {{ selectedItem?.serialNo ? "Serial Number Details" : "Add Serial Info" }}
+    </h6>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="selectedItem?.serialNo">
+      <p><strong>Serial No:</strong> {{ selectedItem?.serialNo }}</p>
+      <p>
+        <strong>Serial Code:</strong> {{ selectedItem?.serialCode || "N/A" }}
+      </p>
     </div>
-  
-    <div class="modal-body">
-      <div *ngIf="selectedItem?.serialNo">
-        <p><strong>Serial No:</strong> {{ selectedItem?.serialNo }}</p>
-        <p><strong>Serial Code:</strong> {{ selectedItem?.serialCode || 'N/A' }}</p>
+
+    <div *ngIf="!selectedItem?.serialNo">
+      <div class="mb-3">
+        <label for="serialNoInput" class="form-label">Serial No</label>
+        <input
+          type="text"
+          id="serialNoInput"
+          class="form-control"
+          [(ngModel)]="serialNoInput"
+        />
       </div>
-  
-      <div *ngIf="!selectedItem?.serialNo">
-        <div class="mb-3">
-          <label for="serialNoInput" class="form-label">Serial No</label>
-          <input
-            type="text"
-            id="serialNoInput"
-            class="form-control"
-            [(ngModel)]="serialNoInput"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="serialCodeInput" class="form-label">Serial Code</label>
-          <input
-            type="text"
-            id="serialCodeInput"
-            class="form-control"
-            [(ngModel)]="serialCodeInput"
-          />
-        </div>
+      <div class="mb-3">
+        <label for="serialCodeInput" class="form-label">Serial Code</label>
+        <input
+          type="text"
+          id="serialCodeInput"
+          class="form-control"
+          [(ngModel)]="serialCodeInput"
+        />
       </div>
     </div>
-  
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
-      <button *ngIf="!selectedItem?.serialNo" type="button" class="btn btn-primary" (click)="saveSerial()">
-        Save
-      </button>
-    </div>
-  </ng-template>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.dismiss()">
+      Cancel
+    </button>
+    <button
+      *ngIf="!selectedItem?.serialNo"
+      type="button"
+      class="btn btn-secondary"
+      (click)="saveSerial()"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<app-additional-cost [itemId]="itemAddedId"></app-additional-cost>

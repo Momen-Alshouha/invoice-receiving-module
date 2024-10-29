@@ -1,0 +1,166 @@
+<div class="container d-flex justify-content-end my-3">
+    <button class="btn btn-dark" (click)="openModal(addCostModal)">
+      <i class="bi bi-plus"></i> Additional Cost
+    </button>
+  </div>
+  
+  
+  <!-- Add Cost Modal Template -->
+  <ng-template #addCostModal let-modal>
+    <div class="modal-content full-screen-modal animated-bottom-to-top">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Cost</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add Cost Form -->
+        <form [formGroup]="additionalCostForm" (ngSubmit)="addCost()">
+          <h5 class="">General Info</h5>
+          <div class="container row mb-4">
+            <div class="col-md-4">
+              <label for="category">Category</label>
+              <select id="category" class="form-select" formControlName="category">
+                <option value="" disabled selected>Choose Category</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Service">Service</option>
+              </select>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="type">Type</label>
+              <select id="type" class="form-select" formControlName="type">
+                <option value="" disabled selected>Choose Type</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Variable">Variable</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                class="form-control"
+                formControlName="description"
+                placeholder="Enter cost description"
+              />
+            </div>
+
+          </div>
+  
+          <div class="container row mb-4">
+            <div class="col-md-4">
+              <label for="serviceProvider">Service Provider</label>
+              <select id="serviceProvider" class="form-select" formControlName="serviceProvider">
+                <option value="" disabled selected>Choose Service Provider</option>
+                <option value="Provider1">Provider 1</option>
+                <option value="Provider2">Provider 2</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label for="referenceNo">Reference No</label>
+              <input
+                type="text"
+                id="referenceNo"
+                class="form-control"
+                formControlName="referenceNo"
+                placeholder="Enter Reference Number"
+              />
+            </div>
+  
+            <div class="col-md-4">
+              <label for="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                class="form-control"
+                formControlName="date"
+              />
+            </div>
+
+          </div>
+  
+  
+          <div class="container row mb-4">
+            <div class="col-md-4">
+              <label for="statusId">Status</label>
+              <select id="statusId" class="form-select" formControlName="statusId">
+                <option value="" disabled selected>Choose Status</option>
+                <option value="1">Draft</option>
+                <option value="2">Completed</option>
+              </select>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="entity">Entity</label>
+              <select id="entity" class="form-select">
+                <option value="" disabled selected>Select Entity</option>
+                <option value="Aqaba">Aqaba</option>
+                <option value="Amman">Amman</option>
+              </select>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light close-cost-modal" (click)="modal.dismiss()">Close</button>
+            <button type="submit" class="btn btn-dark submit-cost" [disabled]="additionalCostForm.invalid">Submit Cost</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+  
+
+<!-- Table Displaying Added Additional Costs -->
+<div class="container table-responsive mt-4">
+  <table class="table table-striped table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Service Provider</th>
+        <th>Reference No</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Entity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="additionalCosts.length === 0">
+        <td colspan="8" class="text-center">No additional costs added yet.</td>
+      </tr>
+      <tr *ngFor="let cost of additionalCosts" (click)="openCostModal(costModal, cost)" style="cursor: pointer;">
+        <td><strong>{{ cost.category }}</strong></td>
+        <td><strong>{{ cost.type }}</strong></td>
+        <td><strong>{{ cost.description }}</strong></td>
+        <td><strong>{{ cost.serviceProvider }}</strong></td>
+        <td><strong>{{ cost.referenceNo }}</strong></td>
+        <td><strong>{{ cost.date | date: 'yyyy-MM-dd' }}</strong></td>
+        <td><strong>{{ cost.statusId === 1 ? 'Draft' : 'Completed' }}</strong></td>
+        <td><strong>{{ cost.entity }}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Template for Viewing Additional Cost Details -->
+<ng-template #costModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Additional Cost Details</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Category:</strong> {{ selectedCost?.category }}</p>
+    <p><strong>Type:</strong> {{ selectedCost?.type }}</p>
+    <p><strong>Description:</strong> {{ selectedCost?.description }}</p>
+    <p><strong>Service Provider:</strong> {{ selectedCost?.serviceProvider }}</p>
+    <p><strong>Reference No:</strong> {{ selectedCost?.referenceNo }}</p>
+    <p><strong>Date:</strong> {{ selectedCost?.date | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Status:</strong> {{ selectedCost?.statusId === 1 ? 'Draft' : 'Completed' }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+  </div>
+</ng-template>
