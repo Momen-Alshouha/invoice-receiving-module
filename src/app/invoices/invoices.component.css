@@ -44,13 +44,12 @@ div.invoice-receiving {
 }
 
 .custom-select {
-    background-color: transparent;
-    border: none;
-    padding-right: 1.75rem; /* Space for arrow */
-  }
-  
-  .custom-select:focus {
-    box-shadow: none; /* Remove focus outline */
-    outline: none;
-  }
-  
+  background-color: transparent;
+  border: none;
+  padding-right: 1.75rem;
+}
+
+.custom-select:focus {
+  box-shadow: none;
+  outline: none;
+}

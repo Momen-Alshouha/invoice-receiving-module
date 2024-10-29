@@ -45,20 +45,20 @@ export class InvoicesComponent implements OnInit {
   constructor(private invoiceService: InvoiceService) {}
 
   clearUserFilter(): void {
-    this.userSearchText = ''; // Clear search input
-    this.selectedUserId = null; // Reset selected user ID
-    this.userResults = []; // Clear search results
-    this.applyFilter(); // Reapply filter to show all invoices
+    this.userSearchText = '';
+    this.selectedUserId = null;
+    this.userResults = [];
+    this.applyFilter();
   }
 
   clearAllFilters(): void {
-    this.userSearchText = ''; // Clear user search text
-    this.selectedUserId = null; // Clear selected user filter
-    this.selectedStatus = null; // Clear selected status filter
-    this.selectedDate = null; // Clear selected date filter
-    this.searchInvoiceSeq = ''; // Clear invoice sequence filter
-    this.userResults = []; // Clear dropdown results
-    this.applyFilter(); // Reapply filter to reset view
+    this.userSearchText = '';
+    this.selectedUserId = null;
+    this.selectedStatus = null;
+    this.selectedDate = null;
+    this.searchInvoiceSeq = '';
+    this.userResults = [];
+    this.applyFilter();
   }
 
   onUserSearch(term: string): void {
@@ -68,7 +68,7 @@ export class InvoicesComponent implements OnInit {
         error: (err) => console.error('Error fetching users', err),
       });
     } else {
-      this.userResults = []; // Clear dropdown if input is empty
+      this.userResults = [];
     }
   }
 
@@ -88,10 +88,10 @@ export class InvoicesComponent implements OnInit {
   }
 
   selectUser(user: any): void {
-    this.selectedUserId = user.id.toString(); // Set the selected user ID
-    this.userSearchText = user.name; // Set input value to the selected name
-    this.userResults = []; // Clear the dropdown
-    this.applyFilter(); // Apply filter immediately after selection
+    this.selectedUserId = user.id.toString();
+    this.userSearchText = user.name;
+    this.userResults = [];
+    this.applyFilter();
   }
 
   ngOnInit(): void {
