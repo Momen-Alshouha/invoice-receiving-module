@@ -8,10 +8,6 @@
   overflow-x: visible;
 }
 
-th {
-  font-weight: 400;
-}
-
 td {
   font-weight: 500;
 }
@@ -60,4 +56,27 @@ select {
 .btn:first-child:active,
 :not(.btn-check) + .btn:active {
   border-color: transparent !important;
+}
+
+th {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.rowsNo {
+  font-size: 14px;
+}
+
+tfoot tr {
+  border-top: 2px solid #bbb;
+}
+
+table {
+  box-shadow: 0px 2px 6.6px 0px #00000017;
+  border-radius: 8px;
+}
+
+th {
+  font-weight: 400;
+  color: #626262 !important;
 }

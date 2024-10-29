@@ -113,5 +113,9 @@ export class InvoiceItemsComponent implements OnInit {
       error: (err) => console.error('Error updating item', err)
     });
   }
-  
+ 
+  getTotalAmount(): number {
+    return this.invoiceItems.reduce((sum, item) => sum + item.totalAmount, 0);
+  }
+
 }

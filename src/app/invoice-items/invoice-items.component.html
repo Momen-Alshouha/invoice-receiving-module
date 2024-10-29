@@ -52,6 +52,11 @@
     </div>
   </div>
 
+  <div class="d-flex justify-content-end">
+    <p class="m-0 mt-3">
+      <span class="rowsNo"># Rows: {{ invoiceItems.length }}</span>
+    </p>
+  </div>
   <table class="table table-striped table-bordered mt-4">
     <thead class="table-light">
       <tr>
@@ -67,6 +72,9 @@
       </tr>
     </thead>
     <tbody>
+      <tr *ngIf="invoiceItems.length === 0">
+        <td colspan="10" class="text-center">No invoices Items Added Yet.</td>
+      </tr>
       <tr *ngFor="let item of invoiceItems">
         <td>{{ item.seq }}</td>
         <td>{{ item.itemNo }}</td>
@@ -89,7 +97,16 @@
         </td>
       </tr>
     </tbody>
+    <!-- Footer Row with Total Amount Sum -->
+    <tfoot>
+      <tr>
+        <td colspan="7" class="text-end fw-bold"></td>
+        <td><strong class="totalAmount">{{ getTotalAmount() | currency:'USD' }}</strong></td>
+        <td></td>
+      </tr>
+    </tfoot>
   </table>
+  
 </div>
 
 <div class="container mt-4">

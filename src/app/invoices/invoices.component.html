@@ -1,4 +1,4 @@
-<div class="container my-4 m-0">
+<div class="my-4 m-0">
   <!-- Global Search Filter -->
 
   <div class="form-group w-100">
@@ -92,7 +92,7 @@
             </div>
           </th>
 
-          <th scope="col" class="w-25">Supplier</th>
+          <th scope="col" class="">Supplier</th>
           <th scope="col">Invoice No</th>
           <th scope="col">
             Creation Date
@@ -117,6 +117,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="invoices.length === 0">
+          <td colspan="8" class="text-center">No invoices found.</td>
+        </tr>
         <tr *ngFor="let invoice of filteredInvoices">
           <td>{{ invoice.invoiceSeq ?? "N/A" }}</td>
           <td>{{ invoice.supplierName ?? "N/A" }}</td>

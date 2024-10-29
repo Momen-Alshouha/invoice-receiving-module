@@ -1,45 +1,52 @@
 .serialNo {
-    padding: 1px 7px;
-    border-radius: 3px;
+  padding: 1px 7px;
+  border-radius: 3px;
 }
 
-
 .summary-box {
-    background-color: #F5F5F5;
-    border-radius: 8px;
-    padding: 20px;
-  }
-  
-  .summary-box .d-flex {
-    font-size: 14px;
-  }
-  
-  .upload-items {
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+}
 
-  .searchItemInput:focus {
-    box-shadow:none !important ;
-  }
+.summary-box .d-flex {
+  font-size: 14px;
+}
 
-  .searchItemInput {
-    border-radius: 8px 0 0 8px;
-  }
+.upload-items {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
 
-  #quantity {
-    width: 55px;
-    border-radius: 0 8px 8px 0;
-    border-left: 0;
-  }
+.searchItemInput:focus {
+  box-shadow: none !important ;
+}
 
-  .qty-div {
-    width: auto;
-    margin-right: 5px;
-  }
+.searchItemInput {
+  border-radius: 8px 0 0 8px;
+}
 
-  .add-item-btn {
-    background-color: white;
-    border: 1px solid gray;
-  }
+#quantity {
+  width: 55px;
+  border-radius: 0 8px 8px 0;
+  border-left: 0;
+}
+
+.qty-div {
+  width: auto;
+  margin-right: 5px;
+}
+
+.add-item-btn {
+  background-color: white;
+  border: 1px solid gray;
+}
+
+.totalAmount{
+  color: #bbb;
+}
+
+tfoot tr {
+  border-top:2px solid #bbb;
+}
