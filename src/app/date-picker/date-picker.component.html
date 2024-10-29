@@ -1,43 +1,36 @@
-<form class="row row-cols-sm-auto">
-	<div class="col-12">
-		<div class="input-group">
-			<input
-				class="form-control"
-				placeholder="yyyy-mm-dd"
-				name="dp"
-				[(ngModel)]="model"
-				(ngModelChange)="onDateSelect()"
-				ngbDatepicker
-				[dayTemplate]="customDay"
-				#d="ngbDatepicker"
-			/>
-			<button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
-			<button 
-				class="btn btn-outline-secondary ms-2" 
-				(click)="clearDate()" 
-				type="button">
-				Clear Date
-			</button>
-		</div>
-	</div>
-</form>
-
-<ng-template
+<div class="d-inline">
+	<!-- Hidden Date Input for Datepicker Functionality -->
+	<input
+	  class="form-control visually-hidden"
+	  placeholder="yyyy-mm-dd"
+	  name="dp"
+	  [(ngModel)]="model"
+	  (ngModelChange)="onDateSelect()"
+	  ngbDatepicker
+	  #d="ngbDatepicker"
+	/>
+  
+	<!-- Datepicker Toggle Button -->
+	<button class="btn bi bi-calendar3 p-0" (click)="d.toggle()" type="button"></button>
+  </div>
+  
+  <ng-template
 	#customDay
 	let-date
 	let-currentMonth="currentMonth"
 	let-selected="selected"
 	let-disabled="disabled"
 	let-focused="focused"
->
+  >
 	<span
-		class="custom-day"
-		[class.weekend]="isWeekend(date)"
-		[class.focused]="focused"
-		[class.bg-primary]="selected"
-		[class.hidden]="date.month !== currentMonth"
-		[class.text-muted]="disabled"
+	  class="custom-day"
+	  [class.weekend]="isWeekend(date)"
+	  [class.focused]="focused"
+	  [class.bg-primary]="selected"
+	  [class.hidden]="date.month !== currentMonth"
+	  [class.text-muted]="disabled"
 	>
-		{{ date.day }}
+	  {{ date.day }}
 	</span>
-</ng-template>
+  </ng-template>
+  

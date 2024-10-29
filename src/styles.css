@@ -5,44 +5,59 @@
 }
 
 .table-responsive {
-    overflow-x: visible;
+  overflow-x: visible;
 }
 
 th {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 td {
-    font-weight: 500;
+  font-weight: 500;
 }
 
-th,tr,td {
-    border: 0;
-    font-size: 14px;
+th,
+tr,
+td {
+  border: 0;
+  font-size: 14px;
 }
 
 table thead tr th:first-child {
-    border-radius: 8px 0 0 0;
+  border-radius: 8px 0 0 0;
 }
 
 table thead tr th:last-child {
-    border-radius: 0 8px 0 0;
+  border-radius: 0 8px 0 0;
 }
 
-.add-invoice-form input:focus, .add-invoice-form .form-select:focus, .add-invoice-form select:focus {
-    border: 0 !important;
-    outline: 0 !important;
-    box-shadow: none !important;
+.add-invoice-form input:focus,
+.add-invoice-form .form-select:focus,
+.add-invoice-form select:focus {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
-.add-invoice-form input:focus,.add-invoice-form .form-select:focus, .add-invoice-form select:focus {
-    background: transparent !important;
-    border: 0 !important;
-    border-bottom: 1px solid #bbb !important;
-    padding: 10px !important;
-    border-radius: 0 !important;
+.add-invoice-form input:focus,
+.add-invoice-form .form-select:focus,
+.add-invoice-form select:focus {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #bbb !important;
+  padding: 10px !important;
+  border-radius: 0 !important;
 }
 
-input,select {
-    box-shadow: none !important;
+input,
+select {
+  box-shadow: none !important;
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  border-color: transparent !important;
 }

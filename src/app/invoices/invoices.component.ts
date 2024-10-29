@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { NgbDateStruct, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { User } from '../interfaces/user';
 @Component({
   selector: 'app-invoices',
   standalone: true,
@@ -36,7 +37,62 @@ export class InvoicesComponent implements OnInit {
     { label: 'Created', value: 2 },
   ];
 
+  //user search
+  userSearchText = '';
+  selectedUserId: number | null = null;
+  userResults: User[] = [];
+
   constructor(private invoiceService: InvoiceService) {}
+
+  clearUserFilter(): void {
+    this.userSearchText = ''; // Clear search input
+    this.selectedUserId = null; // Reset selected user ID
+    this.userResults = []; // Clear search results
+    this.applyFilter(); // Reapply filter to show all invoices
+  }
+
+  clearAllFilters(): void {
+    this.userSearchText = ''; // Clear user search text
+    this.selectedUserId = null; // Clear selected user filter
+    this.selectedStatus = null; // Clear selected status filter
+    this.selectedDate = null; // Clear selected date filter
+    this.searchInvoiceSeq = ''; // Clear invoice sequence filter
+    this.userResults = []; // Clear dropdown results
+    this.applyFilter(); // Reapply filter to reset view
+  }
+
+  onUserSearch(term: string): void {
+    if (term.trim()) {
+      this.invoiceService.searchUsers(term).subscribe({
+        next: (users) => (this.userResults = users),
+        error: (err) => console.error('Error fetching users', err),
+      });
+    } else {
+      this.userResults = []; // Clear dropdown if input is empty
+    }
+  }
+
+  private matchesUser(invoice: Invoice): boolean {
+    const userIdToMatch = Number(this.selectedUserId);
+    const isMatch = this.selectedUserId
+      ? invoice.userId === userIdToMatch
+      : true;
+
+    console.log(`Checking user match for invoice ${invoice.invoiceSeq}:`, {
+      selectedUserId: this.selectedUserId,
+      invoiceUserId: invoice.userId,
+      isMatch,
+    });
+
+    return isMatch;
+  }
+
+  selectUser(user: any): void {
+    this.selectedUserId = user.id.toString(); // Set the selected user ID
+    this.userSearchText = user.name; // Set input value to the selected name
+    this.userResults = []; // Clear the dropdown
+    this.applyFilter(); // Apply filter immediately after selection
+  }
 
   ngOnInit(): void {
     this.loadInvoices();
@@ -50,13 +106,33 @@ export class InvoicesComponent implements OnInit {
   }
 
   applyFilter(): void {
-    this.filteredInvoices = this.invoices.filter(
-      (invoice) =>
-        this.matchesText(invoice) &&
-        this.matchesStatus(invoice) &&
-        this.matchesInvoiceSeq(invoice) &&
-        this.matchesSelectedDate(invoice)
-    );
+    console.log('Applying filter with selectedUserId:', this.selectedUserId);
+
+    this.filteredInvoices = this.invoices.filter((invoice) => {
+      const matchesText = this.matchesText(invoice);
+      const matchesStatus = this.matchesStatus(invoice);
+      const matchesInvoiceSeq = this.matchesInvoiceSeq(invoice);
+      const matchesDate = this.matchesSelectedDate(invoice);
+      const matchesUser = this.matchesUser(invoice);
+
+      console.log(`Invoice ID ${invoice.invoiceSeq}:`, {
+        matchesText,
+        matchesStatus,
+        matchesInvoiceSeq,
+        matchesDate,
+        matchesUser,
+      });
+
+      return (
+        matchesText &&
+        matchesStatus &&
+        matchesInvoiceSeq &&
+        matchesDate &&
+        matchesUser
+      );
+    });
+
+    console.log('Filtered Invoices:', this.filteredInvoices);
   }
 
   toggleInvoiceSeqSearch(): void {

@@ -1,13 +1,56 @@
 .th-status {
-    width: 200px;
+  width: 200px;
 }
 
 .rowsNo {
-    font-size: 14px;
-    font-weight: 400;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .new-invoice-btn {
-    background-color: #353535;
-    border-radius: 8px;
+  background-color: #353535;
+  border-radius: 8px;
 }
+
+div.invoice-receiving {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.floating-search-input {
+  position: absolute;
+  top: 80%;
+  left: 40px;
+  width: 164px;
+  z-index: 10;
+  margin-top: 5px;
+  font-size: 10px;
+  padding: 0;
+}
+
+.floating-search-input .form-control {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 11px;
+}
+
+.bi-search {
+  color: black;
+  font-size: 13px;
+  margin-left: 40px;
+}
+
+.custom-select {
+    background-color: transparent;
+    border: none;
+    padding-right: 1.75rem; /* Space for arrow */
+  }
+  
+  .custom-select:focus {
+    box-shadow: none; /* Remove focus outline */
+    outline: none;
+  }
+  

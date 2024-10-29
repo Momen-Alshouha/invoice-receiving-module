@@ -6,5 +6,6 @@ export const API_ENDPOINTS = {
   InvoiceItems: `${environment.apiBaseUrl}/invoice-items`,
   searchItems: `${environment.apiBaseUrl}/search-item?itemNo=`,
   addInvoiceItem:`${environment.apiBaseUrl}/add-item`,
-  addCost:`${environment.apiBaseUrl}/add-cost`
+  addCost:`${environment.apiBaseUrl}/add-cost`,
+  userSearch:`${environment.apiBaseUrl}/users?name=`
 };
